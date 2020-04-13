@@ -27,14 +27,20 @@
                 <label for="nome">Nome:</label>
                 <input value="${(paisAtual.nome)!}" type="text" class="form-control" placeholder="Informe o nome do país" id="nome" name="nome">
                 <#if nome??>
-                <span>${nome}</span>
+                    <div class="mt-1 alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Erro!</strong> ${nome}
+                    </div>
                 </#if>
             </div>
             <div class="form-group">
                 <label for="sigla">Sigla:</label>
                 <input value="${(paisAtual.sigla)!}" type="text" class="form-control" placeholder="Informe a sigla do país" id="sigla" name="sigla">
                 <#if sigla??>
-                <span>${sigla}</span>
+                    <div class="mt-1 alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Erro!</strong> ${sigla}
+                    </div>
                 </#if>
             </div>
         <#if paisAtual??>
