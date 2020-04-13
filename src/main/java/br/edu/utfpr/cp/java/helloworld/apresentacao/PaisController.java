@@ -26,9 +26,14 @@ public class PaisController {
             PaisModel.builder().id(2L).nome("Estados Unidos").sigla("EUA").build()
         ).collect(Collectors.toList());
     }
+
+    private void adicionaListaPaisesNaMemoria(Model memoria){
+        memoria.addAttribute("listaPaises", this.listaPaises);
+    }
+
     @GetMapping ("/pais")
     public String listar(Model memoria){
-        memoria.addAttribute("listaPaises", this.listaPaises);
+        this.adicionaListaPaisesNaMemoria(memoria);
         return "pais-page";
     }
     @GetMapping ("/pais/apagar")
@@ -42,7 +47,9 @@ public class PaisController {
         if(result.hasErrors()){
             result.getFieldErrors().forEach(erro -> memoria.addAttribute(erro.getField(),erro.getDefaultMessage()));
 
-            memoria.addAttribute("listaPaises", this.listaPaises);
+            this.adicionaListaPaisesNaMemoria(memoria);
+            memoria.addAttribute("paisAtual", pais);
+
             return "pais-page";
         }
 
@@ -55,7 +62,8 @@ public class PaisController {
     public String preparaAlterar(@RequestParam Long id, Model memoria){
         var pais = listaPaises.stream().filter(paisAtual -> paisAtual.getId().equals(id)).findAny().get();
         memoria.addAttribute("paisAtual", pais);
-        memoria.addAttribute("listaPaises", this.listaPaises);
+        this.adicionaListaPaisesNaMemoria(memoria);
+        memoria.addAttribute("alterar", true);
 
         return "pais-page";
     }

@@ -17,7 +17,7 @@
             <h1>Gerenciamento de paises</h1>
             <p>Nesta página você pode listar, criar, alterar ou excluir paises...</p>
         </div>
-        <#if paisAtual??>
+        <#if alterar??>
             <form action="/pais/alterar" method="POST">
                 <input type="hidden" name="id" value="${(paisAtual.id)!}"/>
         <#else>
@@ -43,7 +43,7 @@
                     </div>
                 </#if>
             </div>
-        <#if paisAtual??>
+        <#if alterar??>
             <input type="submit" class="btn btn-warning" value="Alterar">
         <#else>
             <input type="submit" class="btn btn-primary" value="Salvar">
