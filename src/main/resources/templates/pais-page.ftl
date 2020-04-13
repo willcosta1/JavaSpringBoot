@@ -26,10 +26,16 @@
             <div class="form-group">
                 <label for="nome">Nome:</label>
                 <input value="${(paisAtual.nome)!}" type="text" class="form-control" placeholder="Informe o nome do país" id="nome" name="nome">
+                <#if nome??>
+                <span>${nome}</span>
+                </#if>
             </div>
             <div class="form-group">
                 <label for="sigla">Sigla:</label>
                 <input value="${(paisAtual.sigla)!}" type="text" class="form-control" placeholder="Informe a sigla do país" id="sigla" name="sigla">
+                <#if sigla??>
+                <span>${sigla}</span>
+                </#if>
             </div>
         <#if paisAtual??>
             <input type="submit" class="btn btn-warning" value="Alterar">

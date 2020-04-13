@@ -38,10 +38,12 @@ public class PaisController {
         return "redirect:/pais";
     }
     @PostMapping("/pais/criar")
-    public String criar(@Valid PaisModel pais, BindingResult result){
+    public String criar(@Valid PaisModel pais, BindingResult result, Model memoria){
         if(result.hasErrors()){
-            result.getFieldErrors().forEach(erro -> log.info( erro.getField() + " - " + erro.getDefaultMessage()));
-            return "redirect:/pais";
+            result.getFieldErrors().forEach(erro -> memoria.addAttribute(erro.getField(),erro.getDefaultMessage()));
+
+            memoria.addAttribute("listaPaises", this.listaPaises);
+            return "pais-page";
         }
 
         pais.setId(new Long(listaPaises.size() + 1));
