@@ -1,5 +1,7 @@
 package br.edu.utfpr.cp.java.helloworld.apresentacao;
 
+import javax.validation.constraints.Size;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,22 +10,11 @@ import lombok.Data;
 @AllArgsConstructor
 @Builder
 public class PaisModel {
-
-    private Long id;
-    private String nome;
-    private String sigla;
     
-    public void setNome(String nome){
-        if(nome.length() > 15)
-            throw new IllegalArgumentException("Nome não pode ser maior que 15 caracteres");
-        
-        this.nome = nome;
-    }
+    private Long id;
+    @Size (min = 3, max = 15, message = "O nome deve ter entre 3 e 15 caracteres")
+    private String nome;
+    @Size (min = 2, max = 3, message = "A sigla deve ter entre 2 e 3 caracteres")
+    private String sigla;
 
-    public void setSigla(String sigla){
-        if(sigla.length() > 3)
-            throw new IllegalArgumentException("Sigla não pode ser maior que 3 caracteres");
-        
-        this.sigla = sigla;
-    }
 }
