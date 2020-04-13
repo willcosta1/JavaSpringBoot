@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +33,12 @@ public class PaisController {
         return "redirect:/pais";
     }
     @PostMapping("/pais/criar")
-    public String criar(PaisModel pais){
+    public String criar(PaisModel pais, BindingResult result){
+        if(result.hasErrors()){
+            result.getFieldErrors().forEach(erro -> System.out.println(erro.getField() + " - " + erro.getDefaultMessage()));
+            return "redirect:/pais";
+        }
+
         pais.setId(new Long(listaPaises.size() + 1));
         listaPaises.add(pais);
 

@@ -13,4 +13,17 @@ public class PaisModel {
     private String nome;
     private String sigla;
     
+    public void setNome(String nome){
+        if(nome.length() > 15)
+            throw new IllegalArgumentException("Nome não pode ser maior que 15 caracteres");
+        
+        this.nome = nome;
+    }
+
+    public void setSigla(String sigla){
+        if(sigla.length() > 3)
+            throw new IllegalArgumentException("Sigla não pode ser maior que 3 caracteres");
+        
+        this.sigla = sigla;
+    }
 }
