@@ -1,4 +1,4 @@
-package br.edu.utfpr.cp.java.helloworld.apresentacao;
+package br.edu.utfpr.cp.java.helloworld.entidade;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
