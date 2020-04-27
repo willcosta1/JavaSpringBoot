@@ -2,9 +2,27 @@ package br.edu.utfpr.cp.java.helloworld;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
-public class ClientePaisApp {
+@EnableWebSecurity
+public class ClientePaisApp extends WebSecurityConfigurerAdapter{
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication()
+		.withUser("will").password(encoder().encode("12345")).roles("user").and()
+		.withUser("ana").password(encoder().encode("123456")).roles("admin");
+	}
+
+	@Bean
+	public BCryptPasswordEncoder encoder(){
+		return new BCryptPasswordEncoder();
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ClientePaisApp.class, args);
