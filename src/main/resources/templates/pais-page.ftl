@@ -13,6 +13,7 @@
 
 <body>
     <div class="container-fluid">
+        <a href="/logout">Sair da aplicação</a>
         <div class="jumbotron">
             <h1>Gerenciamento de paises</h1>
             <p>Nesta página você pode listar, criar, alterar ou excluir paises...</p>
