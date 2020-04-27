@@ -27,12 +27,16 @@ public class ClientePaisApp extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
+		http
+		.csrf().disable()
+		.authorizeRequests()
 		.antMatchers("/login*").permitAll()
 		.antMatchers("/logout").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()
+		.loginPage("/login.html")
+		.defaultSuccessUrl("/pais", true)
 		.and()
 		.logout();
 	}
