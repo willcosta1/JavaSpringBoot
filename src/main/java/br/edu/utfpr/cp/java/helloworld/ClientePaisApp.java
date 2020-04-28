@@ -3,7 +3,6 @@ package br.edu.utfpr.cp.java.helloworld;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,13 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @SpringBootApplication
 @EnableWebSecurity
 public class ClientePaisApp extends WebSecurityConfigurerAdapter{
-
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-		.withUser("will").password(encoder().encode("12345")).roles("user").and()
-		.withUser("ana").password(encoder().encode("123456")).roles("user", "admin");
-	}
 
 	@Bean
 	public BCryptPasswordEncoder encoder(){
@@ -30,8 +22,8 @@ public class ClientePaisApp extends WebSecurityConfigurerAdapter{
 		http
 		.csrf().disable()
 		.authorizeRequests()
-		.antMatchers("/admin").hasRole("admin")
-		.antMatchers("/user").hasRole("user")
+		.antMatchers("/admin").hasAuthority("admin") //hasRole memoria, hasAuthority banco
+		.antMatchers("/user").hasAuthority("user")
 		.antMatchers("/private").fullyAuthenticated()
 		.antMatchers("/public").permitAll()
 		.antMatchers("/login*").permitAll()
@@ -48,5 +40,11 @@ public class ClientePaisApp extends WebSecurityConfigurerAdapter{
 	public static void main(String[] args) {
 		SpringApplication.run(ClientePaisApp.class, args);
 	}
-
+	//metodo para gerar senhas ao startar aplicação para trabalharmos com o banco h2
+	//que é em memoria, sendo assim, criamos o data.sql em resources (spring entende)
+	//@EventListener(ApplicationReadyEvent.class)
+	//public void init() {
+	//	System.out.println(new BCryptPasswordEncoder().encode("doe"));
+	//	System.out.println(new BCryptPasswordEncoder().encode("doedoe"));
+	//}
 }
