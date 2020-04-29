@@ -4,3 +4,7 @@ INSERT INTO `usuario` values (2, 'ana', '$2a$10$c1WxWrcCfjNzr1iP0hDoC.7JlnosRUcD
 INSERT INTO  `usuario_papeis` VALUES (1,'user');
 INSERT INTO  `usuario_papeis` VALUES (2,'user');
 INSERT INTO  `usuario_papeis` VALUES (2,'admin');
+
+INSERT INTO  `pais` VALUES (1,'Brasil','BR');
+INSERT INTO  `pais` VALUES (2,'Canada','CA');
+INSERT INTO  `pais` VALUES (3,'Estados Unidos','EUA');

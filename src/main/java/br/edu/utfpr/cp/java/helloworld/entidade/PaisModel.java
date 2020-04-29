@@ -3,6 +3,7 @@ package br.edu.utfpr.cp.java.helloworld.entidade;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @NoArgsConstructor //Gerar um construtor sem argumentos automaticamente
+@Table (name = "pais")
 public class PaisModel {
     @Id @GeneratedValue
     private Long id;
