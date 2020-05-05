@@ -7,6 +7,6 @@
 </head>
 <body>
     <h1>Está página é acessível apenas para usúarios com <i>role</i> user.</h1>
-    <h1>Olá <strong>${usuario}</strong> !!!</h1>
+    <h1>Você possui as roles: <strong>${roles}</strong>.</h1>
 </body>
 </html>

@@ -1,8 +1,10 @@
 package br.edu.utfpr.cp.java.helloworld.apresentacao;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,10 +22,9 @@ public class AcessoController {
     }
 
     @GetMapping("/private")
-    public String privatePage(HttpServletResponse response){
-        var usuarioPrincipal = (UsuarioPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public String privatePage(HttpServletRequest request, Authentication usuarioPrincipal){
 
-        response.addCookie(new Cookie("usuarioAtual", usuarioPrincipal.getUsername()));
+        request.getSession().setAttribute("usuarioAtual", (UsuarioPrincipal) usuarioPrincipal.getPrincipal());
 
         return "/privatePage.html";
     }
@@ -34,9 +35,10 @@ public class AcessoController {
     }
     
     @GetMapping("/user")
-    public String userPage(Model memoria ,@CookieValue String usuarioAtual){
+    public String userPage(Model memoria, HttpServletRequest request){
         
-        memoria.addAttribute("usuario", usuarioAtual);
+        var usuarioAtual = (UsuarioPrincipal) request.getSession().getAttribute("usuarioAtual");
+        memoria.addAttribute("roles", usuarioAtual.getAuthorities().toString());
 
         return "/userPage";
     }

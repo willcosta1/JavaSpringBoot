@@ -32,7 +32,7 @@ public class ClientePaisApp extends WebSecurityConfigurerAdapter{
 		.and()
 		.formLogin()
 		.loginPage("/login.html")
-		.defaultSuccessUrl("/pais", false)
+		.defaultSuccessUrl("/private", true)
 		.and()
 		.logout();
 	}
